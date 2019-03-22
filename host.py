@@ -7,19 +7,27 @@ class Host:
         Host.id += 1
         self.position = position
         self.range = signal_range
+
+        self.adjacent_hosts = list()
         self.routes = list()
-        self.adj_hosts = list()
+
+        self.forwarded_packages = list()
 
 
     def __repr__(self):
-        return f"ID:{self.id}\n" + str(self.adj_hosts)
+        return f"ID:{self.id}\n" + str(self.adjacent_hosts)
 
     
-    def update_adj_hosts(self):
+    def update_adj_hosts(self, hosts):
+        # calculate distance between hosts based on pythagoras
         pass
     
 
     def forward_data(self, package):
+        self.forwarded_packages.append(package)
         pass
 
+
+    def check_duplicate(self, package):
+        return package in self.forwarded_packages
 
