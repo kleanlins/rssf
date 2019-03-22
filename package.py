@@ -1,9 +1,14 @@
 class Package:
 
-    package_id = 0
+    id = 0
 
     def __init__(self, data, sender, receiver):
-        self.id = package_id
-        package_id += 1
+        self.id = Package.id
+        Package.id += 1
         self.sender = sender
         self.receiver = receiver
+
+    def __repr__(self):
+        return f"ID:{self.id}\nSENDER:{self.sender}\nRECEIVER:{self.receiver}"
+    
+    
