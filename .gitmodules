@@ -1,0 +1,3 @@
+[submodule "RSSF"]
+	path = RSSF
+	url = https://github.com/JordyLimaEng/RSSF.git
