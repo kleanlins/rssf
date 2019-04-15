@@ -3,7 +3,7 @@ class Host:
     available_address = 0
 
     def __init__(self, position, signal_range):
-        self.address = Host.available_address   # works as it address
+        self.address = Host.available_address 
         Host.available_address += 1
         self.position = position
         self.range = signal_range
@@ -17,12 +17,26 @@ class Host:
         return f"ID:{self.address}\n" + str(self.adjacent_hosts)
 
     
-    def update_adj_hosts(self, other):
-        # calculate distance between hosts based on pythagoras
+    def update_adj_hosts(self, hosts):
+        '''
+        Given a list of available hosts, calculate a direct line
+        representing a distance in kilometers
+        '''
         pass
     
 
+    def measure_distance(self, other):
+        '''
+        Calculate distance between hosts based on pythagoras.
+        '''
+        pass
+
+
     def forward_data(self, package):
+        '''
+        Analyzes the package content, look for it's destination and
+        forward the package if it has the address of the final host.
+        '''
         self.forwarded_packages.append(package)
         pass
 
