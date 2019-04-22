@@ -4,7 +4,7 @@ def generate_coordinates(hosts_quantity, width, height):
     '''
     'hosts_quantity' defines how much coordinates will be generated
 
-    'map_size' represents the width and height of a square shaped map 
+    'width' and 'height' represents the width and height in Km of a map 
     '''
 
     # each position of the arrays below are tied together to form a host coordinate

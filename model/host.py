@@ -5,9 +5,12 @@ class Host:
     def __init__(self, position, signal_range):
         self.address = Host.available_address 
         Host.available_address += 1
+
         self.position = position
         self.range = signal_range
+        self.status = "online"
 
+        # routing data
         self.adjacent_hosts = list()
         self.routes = list()
         self.forwarded_packages = list()
@@ -20,7 +23,7 @@ class Host:
     def update_adj_hosts(self, hosts):
         '''
         Given a list of available hosts, calculate a direct line
-        representing a distance in kilometers
+        representing a distance in kilometers.
         '''
         pass
     
@@ -42,5 +45,8 @@ class Host:
 
 
     def analyze_package(self, package):
+        '''
+        Analyze if the package has already been forwarded.
+        '''
         return package in self.forwarded_packages
 
