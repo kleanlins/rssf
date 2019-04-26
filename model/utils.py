@@ -12,12 +12,24 @@ def generate_coordinates(hosts_quantity, width, height):
     y_positions = list()
 
     for _ in range(hosts_quantity):
+        
+        #For X
         x = random.randint(0, width-1)
-        x_positions.append(x)
+        
+        if(x == 0):
+             x_positions.append(x+1)
+        else:
+             x_positions.append(x)
 
+        #For Y
         y = random.randint(0, height-1)
-        y_positions.append(y)
 
-        # print(f"Generated a host with position: [{x},{y}]")
+        if(y == 0):
+             y_positions.append(y+1)
+        else:
+             y_positions.append(y)
+
+        # print("Generated a host with position: ")
+        # print(x,y)
 
     return x_positions, y_positions
