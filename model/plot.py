@@ -12,7 +12,7 @@ import utils
 
 ## AREA DESCRIPTION ##
 
-hosts_quantity = 5
+hosts_quantity = 10
 
 # values below corresponds to a measurement in kilometers
 width = 15
@@ -32,14 +32,19 @@ plt.axis([0, width, 0, height])
 plt.xlabel("in Km")
 plt.ylabel("in Km")
 
+
 # plotting triangles
 plt.plot(x, y, 'k^')
 
+n = []
 # plotting hosts names
 for i in range(hosts_quantity):
-    plt.annotate(i, (x[i]+0.1, y[i]+0.1))
+    plt.annotate(i+1, (x[i]+0.1, y[i]+0.1))
+    n.append(i+1)
 
 print("em x:",x ,"em y:" ,y) 
+
+adj_list = list()
 
 for j in range(hosts_quantity - 1):
     for k in range(hosts_quantity - 1):
@@ -47,16 +52,19 @@ for j in range(hosts_quantity - 1):
         b = abs(y[j+1] - y[k])
         h = mt.sqrt(mt.pow(a,2) + mt.pow(b,2))
     
-        if(h<=3.3 and h != 0):
-            print(x[j+1],y[j+1]," Está no alcance de ", x[k],y[k])
+        if(h<=3.9 and h != 0 and x[j+1] != x[j] and y[j+1]!=y[j]):
+            # print(n[j+1]," Está no alcance de ", n[k])
+            adj_list.append(n[j+1])
+            adj_list.append(n[k])
         #else:
            # print(x[j],y[j]," Não está no alcance de ", x[k+1],y[k+1])
 
+print("Ajd List =>",adj_list)
 #plot the circles with a fixed area of 25000, what results in a Radius of 3.2 aprox.
 r = mt.sqrt((25000/np.pi))
-print(r)
+#print(r)
 area = np.pi * (r*r)
-print(area)
+#print(area)
 
 # plotting estimated area coverage
 plt.scatter(x, y, s=area, alpha=0.11)
