@@ -13,3 +13,5 @@ class Package:
         return f"ID:{self.id}\nSENDER:{self.sender}\nRECEIVER:{self.receiver}"
         
         
+    def __eq__(self, other):
+        return self.id == other.id

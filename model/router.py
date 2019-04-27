@@ -25,6 +25,7 @@ class Router:
         '''
         pass
 
+
     def trace_route(self, data, sender, receiver):
         '''
         Creates a route based on sender, receiver and host list of adjacency.

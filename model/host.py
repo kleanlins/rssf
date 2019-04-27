@@ -1,3 +1,5 @@
+import math
+
 class Host:
     
     available_address = 0
@@ -17,22 +19,30 @@ class Host:
 
 
     def __repr__(self):
-        return f"ID:{self.address}\n" + str(self.adjacent_hosts)
+        return f"Object <Host> ID:{self.address} - {self.position} - {self.adjacent_hosts}"
 
-    
+
     def update_adj_hosts(self, hosts):
         '''
         Given a list of available hosts, calculate a direct line
         representing a distance in kilometers.
         '''
-        pass
-    
 
-    def measure_distance(self, other):
+        for host in hosts:
+            if self.address != host.address:
+                if self.is_reachable(host) < self.range:
+                    self.adjacent_hosts.append(host)
+
+
+    def is_reachable(self, other):
         '''
-        Calculate distance between hosts based on pythagoras.
-        '''
-        pass
+        Tests if a host is reachable by analyzing it's range.
+        '''        
+
+        dx = self.position[0] - other.position[0]
+        dy = self.position[1] - other.position[1]
+
+        return (dx**2 + dy **2)**0.5
 
 
     def forward_data(self, package):
@@ -40,13 +50,7 @@ class Host:
         Analyzes the package content, look for it's destination and
         forward the package if it has the address of the final host.
         '''
-        self.forwarded_packages.append(package)
-        pass
+        if package not in self.forwarded_packages:
+            self.forwarded_packages.append(package)
 
-
-    def analyze_package(self, package):
-        '''
-        Analyze if the package has already been forwarded.
-        '''
-        return package in self.forwarded_packages
 
