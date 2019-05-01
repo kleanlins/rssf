@@ -11,11 +11,13 @@ class Router:
         pass
 
     
-    def discovery(self):
+    def hello(self):
         '''
         Creates a list of adjacency for each host.
         '''
-        pass
+        for host in self.hosts:
+            host.update_adj_hosts(self.hosts)
+            # print(host)
 
 
     def change_host_status(self, host):
@@ -32,3 +34,14 @@ class Router:
         Return a list of hosts representing a route.
         '''
         pass
+
+    
+    def create_routes(self):
+        '''
+        Creates a route to each host for each host.
+        '''
+
+        for host in self.hosts:
+            #host.find_route to each host thats not on its adjacence
+            pass
+

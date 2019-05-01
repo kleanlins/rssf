@@ -1,10 +1,16 @@
 import math
 
 class Host:
+    '''
+    A Host is defined by it's address, position, signal range and status.
+    '''
     
     available_address = 0
 
     def __init__(self, position, signal_range):
+        '''
+        By default a new instance of host has it's status set to 'online'.
+        '''
         self.address = Host.available_address 
         Host.available_address += 1
 
@@ -13,13 +19,13 @@ class Host:
         self.status = "online"
 
         # routing data
-        self.adjacent_hosts = list()
+        self.adjacent_hosts = dict()
         self.routes = list()
         self.forwarded_packages = list()
 
 
     def __repr__(self):
-        return f"Object <Host> ID:{self.address} - {self.position} - {self.adjacent_hosts}"
+        return f"{self.address}"
 
 
     def update_adj_hosts(self, hosts):
@@ -30,8 +36,9 @@ class Host:
 
         for host in hosts:
             if self.address != host.address:
-                if self.is_reachable(host) < self.range:
-                    self.adjacent_hosts.append(host)
+                if self.is_reachable(host) < self.range and host.status == "online":
+                    # print(f"{self.address} can reach {host.address} with {round(self.is_reachable(host), 2)} Km")
+                    self.adjacent_hosts[host] = self.is_reachable(host)
 
 
     def is_reachable(self, other):
@@ -52,5 +59,22 @@ class Host:
         '''
         if package not in self.forwarded_packages:
             self.forwarded_packages.append(package)
+            return "OK"
+        else:
+            return "DUPLICATE"
 
 
+    def find_route(self, destination, route, distance):
+        '''
+        Uses recursion to find a route to a destination using adjacence list.
+        Returns ROUTE
+        '''
+        route.append(self.address)
+
+        if destination in self.adjacent_hosts:
+            route.append(destination.address)
+            return route, distance + self.adjacent_hosts[destination]
+        
+        else:
+            for host in self.adjacent_hosts.keys():
+                return host.find_route(destination, route, distance)

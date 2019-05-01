@@ -47,3 +47,4 @@ def plot_reachable_hosts(host):
     '''
     Plot an arrow indicating all reachable hosts.
     '''
+    
