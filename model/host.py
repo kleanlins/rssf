@@ -20,12 +20,16 @@ class Host:
 
         # routing data
         self.adjacent_hosts = dict()
-        self.routes = list()
+        self.routes = dict()
         self.forwarded_packages = list()
 
 
     def __repr__(self):
         return f"{self.address}"
+
+
+    def __eq__(self, other):
+        return self.address == other.address
 
 
     def update_adj_hosts(self, hosts):
@@ -67,14 +71,23 @@ class Host:
     def find_route(self, destination, route, distance):
         '''
         Uses recursion to find a route to a destination using adjacence list.
-        Returns ROUTE
+        Returns ROUTE, DISTANCE
         '''
-        route.append(self.address)
+        if len(self.adjacent_hosts < 2):
+            return route, distance
 
+        route.append(self.address)
+        
+        # IF THE DESTINATION SENT AS ARGUMENT IS AN ADJACENT HOST
         if destination in self.adjacent_hosts:
             route.append(destination.address)
             return route, distance + self.adjacent_hosts[destination]
         
-        else:
-            for host in self.adjacent_hosts.keys():
-                return host.find_route(destination, route, distance)
+        s_route = []
+        s_distance = 0
+
+        for host in self.adjacent_hosts.keys():
+            if host.address not in route:
+                s_route, s_distance = host.find_route(destination, route, distance + self.adjacent_hosts[host])
+                    
+         
