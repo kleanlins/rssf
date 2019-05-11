@@ -2,14 +2,14 @@
 ## Esqueleto
 
 ## Camadas
-### * Física
-### * Enlace
-### * Rede
+ * Física
+ * Enlace
+ * Rede
 
 ## Entidades
  * Router
  * Package
- * Host
+ * Host  
  ...
 
 ## Roteamento
