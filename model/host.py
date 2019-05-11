@@ -42,7 +42,7 @@ class Host:
             if self.address != host.address:
                 if self.is_reachable(host) < self.range and host.status == "online":
                     # print(f"{self.address} can reach {host.address} with {round(self.is_reachable(host), 2)} Km")
-                    self.adjacent_hosts[host] = self.is_reachable(host)
+                    self.adjacent_hosts[host.address] = self.is_reachable(host)
 
 
     def is_reachable(self, other):

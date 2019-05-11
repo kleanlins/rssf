@@ -17,7 +17,6 @@ class Router:
         '''
         for host in self.hosts:
             host.update_adj_hosts(self.hosts)
-            # print(host)
 
 
     def change_host_status(self, host):
@@ -25,8 +24,10 @@ class Router:
         Based on host ID, change it's status to online or offline.
         Mainly to test routing reconfiguration.
         '''
-        pass
-
+        if self.hosts[host].status == "online":
+            self.hosts[host].status = "offline"
+        else:
+            self.hosts[host].status = "online"
 
     def trace_route(self, data, sender, receiver):
         '''
