@@ -10,7 +10,7 @@ import views
 WIDTH = 15
 HEIGHT = 15
 
-HOSTS_QUANTITY = 10
+HOSTS_QUANTITY = 15
 SIGNAL_RANGE = 5
 
 class Manager:
@@ -71,7 +71,11 @@ class Manager:
 
 
     def find_routes(self, id, d_id):
-        return self.router.create_routes(id, d_id)
+        route, distance = self.router.create_routes(id, d_id)
 
+        if distance != 0:
+            views.plot_route(self.hosts, route, WIDTH, HEIGHT)
+        else:
+            print("not reachable")
 
 m = Manager()

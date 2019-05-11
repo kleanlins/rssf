@@ -29,13 +29,6 @@ class Router:
         else:
             self.hosts[host].status = "online"
 
-    def trace_route(self, data, sender, receiver):
-        '''
-        Creates a route based on sender, receiver and host list of adjacency.
-        Return a list of hosts representing a route.
-        '''
-        pass
-
     
     def create_routes(self, host_id, dest_id):
         '''

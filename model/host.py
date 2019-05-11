@@ -48,12 +48,11 @@ class Host:
                     # print(f"{self.address} can reach {host.address} with {round(self.distance_to(host), 2)} Km")
                     self.adjacent_hosts.append(host)
 
-        
-        # self.adjacent_hosts = sorted(self.adjacent_hosts, key=lambda x: self.distance_to(x))
-
         # print(self.address, self.adjacent_hosts)
+        self.adjacent_hosts = sorted(self.adjacent_hosts, key=lambda x: x.distance_to(self))
+
         for host in self.adjacent_hosts:
-            print(self.address,"->", host, "d=", self.distance_to(host))
+            print(f"{self.address} -> {host} d={self.distance_to(host)}")
 
 
     def distance_to(self, other):
@@ -85,33 +84,29 @@ class Host:
         Returns ROUTE, DISTANCE
         '''
 
-        print("Entered in: ", self)
+        # print("Entered in: ", self)
 
-        if len(self.adjacent_hosts) < 2:
+        if len(self.adjacent_hosts) < 1:
             return route, distance
 
         route.append(self)
-        
-        # print("entrou no host", self, route)
 
         # IF THE DESTINATION SENT AS ARGUMENT IS AN ADJACENT HOST
         if destination in self.adjacent_hosts:
-            print(f"{destination} é adj de {self}")
             route.append(destination)
             print(route)
             return route, distance + self.distance_to(destination)
-
 
         s_route = []
         s_distance = 0
 
         for host in self.adjacent_hosts:
+
             if host not in route:
                 s_route, s_distance = host.find_route(destination, route, distance + self.distance_to(host))
+
                 if destination in s_route:
-                    print(f"achou rota {s_route} com distancia {s_distance}")
                     return s_route, s_distance
-            else:
-                print("theres no route for this")
-                    
-         
+
+        route = []
+        return route, distance
