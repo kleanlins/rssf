@@ -10,6 +10,7 @@ def plot_map(hosts, width, height):
     '''
     # figure dimensions
     plt.axis([0, width, 0, height])
+    # fig = plt.figure(figsize = (10,10))
 
     # figure labels
     plt.xlabel("in Km")
@@ -43,8 +44,7 @@ def plot_host_routes(host):
     pass
 
 
-def plot_reachable_hosts(host):
+def plot_reachable_hosts(host, width, height):
     '''
     Plot an arrow indicating all reachable hosts.
     '''
-    

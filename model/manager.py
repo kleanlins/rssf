@@ -33,12 +33,12 @@ class Manager:
 
         ## ROUTER INSTANTIATION ##
         print("Creating router...", end=" ")
-        router = Router(self.hosts)
+        self.router = Router(self.hosts)
         print("Router created.")
 
         # gives an list of near active hosts for each host
         print("Running Hello for each host...", end=" ")
-        router.hello()
+        self.router.hello()
         print("Host Hello status complete.\n")
 
         # now each host should discover a route to each other host
@@ -66,8 +66,12 @@ class Manager:
         views.plot_map(self.hosts, WIDTH, HEIGHT)
 
     
-    def reachable_hosts(self, host):
-        views.plot_reachable_hosts(self.hosts)
+    def reachable_hosts(self, host_id):
+        views.plot_reachable_hosts(self.hosts[host_id], WIDTH, HEIGHT)
 
 
-Manager()
+    def find_routes(self, id, d_id):
+        return self.router.create_routes(id, d_id)
+
+
+m = Manager()

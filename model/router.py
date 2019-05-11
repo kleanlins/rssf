@@ -37,12 +37,11 @@ class Router:
         pass
 
     
-    def create_routes(self):
+    def create_routes(self, host_id, dest_id):
         '''
         Creates a route to each host for each host.
         '''
+        route = []
 
-        for host in self.hosts:
-            #host.find_route to each host thats not on its adjacence
-            pass
+        return self.hosts[host_id].find_route(self.hosts[dest_id], route, 0)
 
