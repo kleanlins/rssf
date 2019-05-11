@@ -1,5 +1,5 @@
 # Relatório Redes Sem Fio
-## Esqueleto
+
 
 ## Camadas
  * Física
