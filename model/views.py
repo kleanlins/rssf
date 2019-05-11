@@ -40,8 +40,8 @@ def plot_route(hosts, width, height)):
     plt.xlabel("in Km")
     plt.ylabel("in Km")
 
-    for i in range(hosts):
-        if(i<len(hosts)):
+    for i in range(len(hosts)-1):
+        if(i<=len(hosts)):
             # plotting host representation
             plt.plot(hosts[i].position[0], hosts[i].position[1], 'k^')
 
@@ -54,6 +54,15 @@ def plot_route(hosts, width, height)):
 
             # plotting the path from actual host to the next host
             plt.arrow(hosts[i].position[0], hosts[i].position[1], hosts[i+1].position[0] - hosts[i].position[0], hosts[i+1].position[1] - hosts[i].position[1])
+
+        # plotting last host representation
+        plt.plot(hosts[i+1].position[0], hosts[i+1].position[1], 'k^')
+        # plotting last host name
+        plt.annotate(hosts[i+1].address, (hosts[i+1].position[0]+0.1, hosts[i+1].position[1]+0.1))
+        # plotting estimated area coverage of the last host
+        area = math.pi * (hosts[i+1].range ** 2)
+        plt.scatter(hosts[i+1].position[0], hosts[i+1].position[1], s=area*900, alpha=0.1)
+
     
     plt.show()
 
