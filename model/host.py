@@ -36,6 +36,13 @@ class Host:
         return hash((self.address,))
 
 
+    def change_status(self):
+        '''
+        Change status to online or offline
+        '''
+        self.status = "offline" if self.status == "online" else "online"
+
+
     def update_adj_hosts(self, hosts):
         '''
         Given a list of available hosts, calculate a direct line
@@ -45,10 +52,9 @@ class Host:
         for host in hosts:
             if self.address != host.address:
                 if self.distance_to(host) < self.range and host.status == "online":
-                    # print(f"{self.address} can reach {host.address} with {round(self.distance_to(host), 2)} Km")
+                    
                     self.adjacent_hosts.append(host)
 
-        # print(self.address, self.adjacent_hosts)
         self.adjacent_hosts = sorted(self.adjacent_hosts, key=lambda x: x.distance_to(self))
 
         for host in self.adjacent_hosts:
@@ -78,6 +84,11 @@ class Host:
             return "DUPLICATE"
 
 
+    def add_route(self, route, destination, distance):
+        r = route[route.index(self):]
+        self.routes[destination.address] = (r, distance)
+
+
     def find_route(self, destination, route, distance):
         '''
         Uses recursion to find a route to a destination using adjacence list.
@@ -89,10 +100,11 @@ class Host:
         if len(self.adjacent_hosts) < 1:
             return route, distance
 
-        route.append(self)
+        
 
         # IF THE DESTINATION SENT AS ARGUMENT IS AN ADJACENT HOST
-        if destination in self.adjacent_hosts:
+        if destination in self.adjacent_hosts and destination.status != "offline":
+            route.append(self)
             route.append(destination)
             print(route)
             return route, distance + self.distance_to(destination)
@@ -102,11 +114,13 @@ class Host:
 
         for host in self.adjacent_hosts:
 
-            if host not in route:
+            if host not in route and host.status != "offline":
+                route.append(self)
                 s_route, s_distance = host.find_route(destination, route, distance + self.distance_to(host))
 
                 if destination in s_route:
+                    self.add_route(s_route, destination, s_distance)
                     return s_route, s_distance
 
-        route = []
-        return route, distance
+
+        return route[:-1], distance

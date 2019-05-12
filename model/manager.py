@@ -25,7 +25,7 @@ class Manager:
 
         ## HOSTS INSTANTIATION ##
         # generates a random position and creates a host with it 
-        print(f"\nGenerating positions for {HOSTS_QUANTITY} hosts in a map {WIDTH}x{HEIGHT} Km...", end=" ")
+        print(f"\nGen {HOSTS_QUANTITY} hosts in {WIDTH}x{HEIGHT} Km...", end=" ")
         positions = utils.generate_coordinates(HOSTS_QUANTITY, WIDTH, HEIGHT)
         for position in positions:
             self.hosts.append(Host(position, SIGNAL_RANGE))
@@ -70,12 +70,32 @@ class Manager:
         views.plot_reachable_hosts(self.hosts[host_id], WIDTH, HEIGHT)
 
 
-    def find_routes(self, id, d_id):
-        route, distance = self.router.create_routes(id, d_id)
+    def find_routes(self, id):
+        for i in range(len(self.hosts)):
+            if i != id:
+                self.router.create_routes(id, i)
 
-        if distance != 0:
-            views.plot_route(self.hosts, route, WIDTH, HEIGHT)
-        else:
-            print("not reachable")
+
+    def show_routes(self, host_id):
+        print(self.hosts[host_id].routes)
+
+
+    def show_route(self, host_id, host_dest):
+        route, _ = self.hosts[host_id].routes[host_dest]
+        views.plot_route(self.hosts, route, WIDTH, HEIGHT)
+
+
+    def set_offline(self, host_id):
+        '''
+        Sets an host to offline status.
+        '''
+
+        self.hosts[host_id].change_status()
+        self.find_routes(host_id)
+
+        # find_routes again
+        pass
+
 
 m = Manager()
+m.show_map()
