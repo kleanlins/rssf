@@ -29,49 +29,85 @@ def plot_map(hosts, width, height):
     plt.show()
 
 
-def plot_route(hosts, width, height)):
+def plot_route(hosts, route, width, height):
     '''
     Gets a list of hosts and plot a route based on first and last objects.
     '''
     # figure dimensions
     plt.axis([0, width, 0, height])
+    # fig = plt.figure(figsize = (10,10))
 
     # figure labels
     plt.xlabel("in Km")
     plt.ylabel("in Km")
 
-    for i in range(len(hosts)-1):
-        if(i<=len(hosts)):
-            # plotting host representation
-            plt.plot(hosts[i].position[0], hosts[i].position[1], 'k^')
-
-            # plotting host name
-            plt.annotate(hosts[i].address, (hosts[i].position[0]+0.1, hosts[i].position[1]+0.1))
-
-            # plotting estimated area coverage
-            area = math.pi * (hosts[i].range ** 2)
-            plt.scatter(hosts[i].position[0], hosts[i].position[1], s=area*900, alpha=0.1)
-
-            # plotting the path from actual host to the next host
-            plt.arrow(hosts[i].position[0], hosts[i].position[1], hosts[i+1].position[0] - hosts[i].position[0], hosts[i+1].position[1] - hosts[i].position[1])
-
-        # plotting last host representation
-        plt.plot(hosts[i+1].position[0], hosts[i+1].position[1], 'k^')
-        # plotting last host name
-        plt.annotate(hosts[i+1].address, (hosts[i+1].position[0]+0.1, hosts[i+1].position[1]+0.1))
-        # plotting estimated area coverage of the last host
-        area = math.pi * (hosts[i+1].range ** 2)
-        plt.scatter(hosts[i+1].position[0], hosts[i+1].position[1], s=area*900, alpha=0.1)
-
+    for host in hosts:
+        # plotting host representation
+        plt.plot(host.position[0], host.position[1], 'k^')
+        
+        # plotting host name
+        plt.annotate(host.address, (host.position[0]+0.1, host.position[1]+0.1))
     
+        # plotting estimated area coverage
+        area = math.pi * (host.range ** 2)
+        plt.scatter(host.position[0], host.position[1], s=area*900, alpha=0.1)
+        
+
+    for i in range(len(route)-1):
+        x = route[i].position[0]
+        y = route[i].position[1]
+
+        dx = route[i+1].position[0] - route[i].position[0]
+        dy = route[i+1].position[1] - route[i].position[1]
+
+        # plt.arrow(route[i].position[0], route[i].position[1], route[i+1].position[0], route[i+1].position[1])
+        plt.arrow(x, y, dx, dy)
+
+
     plt.show()
 
 
-def plot_host_routes(host):
+def plot_host_routes(hosts, origin, width, height):
     '''
     Plot all possible routes based on a host list of adjacency.
+
+        assumindo que vá receber adj_list_A = [B,C,D]
+        Desenho fica:
+                          B  
+                         /
+                        A -- C
+                         \
+                          D
     '''
-    pass
+    # figure dimensions
+    plt.axis([0, width, 0, height])
+    # fig = plt.figure(figsize = (10,10))
+
+    # figure labels
+    plt.xlabel("in Km")
+    plt.ylabel("in Km")
+
+    for host in hosts:
+        # plotting host representation
+        plt.plot(host.position[0], host.position[1], 'k^')
+        
+        # plotting host name
+        plt.annotate(host.address, (host.position[0]+0.1, host.position[1]+0.1))
+    
+        # plotting estimated area coverage
+        area = math.pi * (host.range ** 2)
+        plt.scatter(host.position[0], host.position[1], s=area*900, alpha=0.1)
+    
+    for i in range(len(origin.adj)-1):
+        x = hosts[origin].position[0]
+        y = hosts[origin].position[1]
+
+        dx = hosts[origin].adj[i+1].position[0] - hosts[origin].position[0]
+        dy = hosts[origin].adj[i+1].position[1] - hosts[origin].position[1]
+        
+        plt.arrow(x, y, dx, dy)
+
+    plt.show()
 
 
 def plot_reachable_hosts(host):
