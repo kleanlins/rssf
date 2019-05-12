@@ -29,6 +29,8 @@
 ## Encapsulamento dos pacotes
 
 ## Organização da rede
+A rede é gerada aleatóriamente, utilizando bibliotecas do Python para gerar números randômicos para valores em X e Y que representam a posição dos hosts na rede, além de um scatter que representa o alcance de cada host em relação aos outros hosts da rede.
+* plot com uma rede gerada aleatoriamente *
 
 ## Visualização de Rotas
 
