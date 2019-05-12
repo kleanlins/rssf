@@ -23,7 +23,7 @@
 
 * **Observações: Ao implementar qualquer função, lembrem-se que estão trabalhando com redes sem fio. Por isso tenham em mente**:
   * **A transmissão é sempre broadcast. A diferença é que apenas alguns recebem**
-  * **Podem ocorrer colisões **
+  * **Podem ocorrer colisões**
   * **O alcance do rádio é limitado, por isso distância entre nós importa**
   * **Cuidado com o loop de roteamento**
   * **Enlaces podem falhar devido à mobilidade e energia dos nós**
