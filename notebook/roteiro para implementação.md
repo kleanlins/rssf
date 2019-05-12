@@ -30,38 +30,38 @@
   * Antes do roteamento, os nós precisam descobrir os seus vizinhos
 
 * O que será avaliado:
- * Se o aluno implementou de fato as camadas
- * Se o pacote segue o caminho definido
- * Se o caminho é recalculado em caso de falhas de enlaces
- * Presença de descrição e justificativa de todas as decisões tomadas
+  * Se o aluno implementou de fato as camadas
+  * Se o pacote segue o caminho definido
+  * Se o caminho é recalculado em caso de falhas de enlaces
+  * Presença de descrição e justificativa de todas as decisões tomadas
 
 * O que não estou pedindo, mas pode contar a favor:
- * Energia dos nós
- * Mobilidade dos nós
- * Correção de erro
- * Retransmissão
- * Confirmação de entrega
- * Ordem de chegadas dos pacotes
+  * Energia dos nós
+  * Mobilidade dos nós
+  * Correção de erro
+  * Retransmissão
+  * Confirmação de entrega
+  * Ordem de chegadas dos pacotes
 
 * O que deve ser entregue:
- * Código fonte completo do projeto e qualquer outro arquivo necessário para executá-lo. Os arquivos devem ser auto-contidos.
- * Log auto-explicativo, mostrando que o seu projeto funciona. Tente ser o mais detalhado possível ao preparar o log (i.e. use debug/print em todas os passos cruciais)
- * Um relatório detalhado de tudo o que foi implementado, descrevendo as funcionalidades e as decisões tomadas. Ex 1: Para medir a distância entre os nós foi utilizada a fórmula da distância euclidiana. Ex 2: Foi utilizada uma probabilidade XYZ para decidir qual nó irá ter acesso ao meio.
+  * Código fonte completo do projeto e qualquer outro arquivo necessário para executá-lo. Os arquivos devem ser auto-contidos.
+  * Log auto-explicativo, mostrando que o seu projeto funciona. Tente ser o mais detalhado possível ao preparar o log (i.e. use debug/print em todas os passos cruciais)
+  * Um relatório detalhado de tudo o que foi implementado, descrevendo as funcionalidades e as decisões tomadas. Ex 1: Para medir a distância entre os nós foi utilizada a fórmula da distância euclidiana. Ex 2: Foi utilizada uma probabilidade XYZ para decidir qual nó irá ter acesso ao meio.
 
 * Opções de protocolos de roteamento:
- * Protocolos de roteamento baseado em tabelas
-  * Dynamic Destination-Sequenced Distance-Vector Routing Protocol
-  * The Wireless Routing Protocol
-  * Global State Routing
-  * Fisheye State Routing
-  * Hierarchical State Routing
-  * Zone-based Hierarchical Link State Routing Protocol
-  * Clusterhead Gateway Switch Routing Protocol
+  * Protocolos de roteamento baseado em tabelas
+    * Dynamic Destination-Sequenced Distance-Vector Routing Protocol
+    * The Wireless Routing Protocol
+    * Global State Routing
+    * Fisheye State Routing
+    * Hierarchical State Routing
+    * Zone-based Hierarchical Link State Routing Protocol
+    * Clusterhead Gateway Switch Routing Protocol
   
 * Protocolos de roteamento sob-demanda
- * Cluster based Routing Protocol
- * Ad hoc On-demand Distance Vector Routing
- * Dynamic Source Routing Protocol
- * Temporally Ordered Routing Algorithm
- * Associativity Based Routing
- * Signal Stability Routing
+  * Cluster based Routing Protocol
+  * Ad hoc On-demand Distance Vector Routing
+  * Dynamic Source Routing Protocol
+  * Temporally Ordered Routing Algorithm
+  * Associativity Based Routing
+  * Signal Stability Routing
