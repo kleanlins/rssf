@@ -21,13 +21,13 @@
 
 * A simulação deve gerar log com o resultado do encaminhamento para análise.
 
-* **Observações: Ao implementar qualquer função, lembrem-se que estão trabalhando com redes sem fio. Por isso tenham em mente:
-  * **A transmissão é sempre broadcast. A diferença é que apenas alguns recebem
-  * **Podem ocorrer colisões 
-  * **O alcance do rádio é limitado, por isso distância entre nós importa.
-  * **Cuidado com o loop de roteamento
-  * **Enlaces podem falhar devido à mobilidade e energia dos nós
-  * **Antes do roteamento, os nós precisam descobrir os seus vizinhos
+* **Observações: Ao implementar qualquer função, lembrem-se que estão trabalhando com redes sem fio. Por isso tenham em mente**:
+  * **A transmissão é sempre broadcast. A diferença é que apenas alguns recebem**
+  * **Podem ocorrer colisões **
+  * **O alcance do rádio é limitado, por isso distância entre nós importa**
+  * **Cuidado com o loop de roteamento**
+  * **Enlaces podem falhar devido à mobilidade e energia dos nós**
+  * **Antes do roteamento, os nós precisam descobrir os seus vizinhos**
 
 * **O que será avaliado:
   * Se o aluno implementou de fato as camadas
