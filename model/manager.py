@@ -52,16 +52,6 @@ class Manager:
         pass
 
 
-    def send_data(self, data, sender, receiver):
-        '''
-        Sends a package based on its sender and receiver.
-        If there's no way to get to the receiver, throws an error.
-        If gets a list of hosts back, plot the route.
-        '''
-        # for each host in route -> host.forward(Package("data", 0, 1))
-        pass
-
-
     def show_map(self):
         views.plot_map(self.hosts, WIDTH, HEIGHT)
 
@@ -74,10 +64,14 @@ class Manager:
         for i in range(len(self.hosts)):
             if i != id:
                 self.router.create_routes(id, i)
+        
+        for k, v in self.hosts[id].routes.items():
+            print(k, v)
 
 
     def show_routes(self, host_id):
-        print(self.hosts[host_id].routes)
+        for k, v in self.hosts[host_id].routes.items():
+            print(k, v)
 
 
     def show_route(self, host_id, host_dest):
@@ -89,12 +83,26 @@ class Manager:
         '''
         Sets an host to offline status.
         '''
-
         self.hosts[host_id].change_status()
-        self.find_routes(host_id)
 
-        # find_routes again
-        pass
+    
+    def send_data(self, data, sender_id, receiver_id):
+        '''
+        Sends a package based on its sender and receiver.
+        If there's no way to get to the receiver, throws an error.
+        If gets a list of hosts back, plot the route.
+        '''
+        self.find_routes(sender_id)
+
+        if receiver_id in self.hosts[sender_id].routes:
+            route, distance = self.hosts[sender_id].routes[receiver_id]
+            views.plot_route(self.hosts, route, WIDTH, HEIGHT)
+
+            print(end="")
+        else:
+            print(f"Theres no route for the host {receiver_id}.")
+
+
 
 
 m = Manager()

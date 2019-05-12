@@ -85,8 +85,22 @@ class Host:
 
 
     def add_route(self, route, destination, distance):
-        r = route[route.index(self):]
-        self.routes[destination.address] = (r, distance)
+        after = route[route.index(self):]
+        before = route[:route.index(self)]
+        
+        redundancy = []
+
+        for each in after:
+              if each in self.adjacent_hosts:
+                  redundancy.append(each)
+
+        if len(redundancy) > 1:
+            for each in redundancy[:-1]:
+                after.remove(each)
+        
+        self.routes[destination.address] = (before+after, distance)
+        return before + after
+
 
 
     def find_route(self, destination, route, distance):
@@ -99,28 +113,27 @@ class Host:
 
         if len(self.adjacent_hosts) < 1:
             return route, distance
-
         
 
         # IF THE DESTINATION SENT AS ARGUMENT IS AN ADJACENT HOST
         if destination in self.adjacent_hosts and destination.status != "offline":
             route.append(self)
             route.append(destination)
-            print(route)
+            # print(route)
             return route, distance + self.distance_to(destination)
 
         s_route = []
         s_distance = 0
 
+        route.append(self)
+
         for host in self.adjacent_hosts:
 
             if host not in route and host.status != "offline":
-                route.append(self)
                 s_route, s_distance = host.find_route(destination, route, distance + self.distance_to(host))
 
                 if destination in s_route:
-                    self.add_route(s_route, destination, s_distance)
+                    s_route = self.add_route(s_route, destination, s_distance)
                     return s_route, s_distance
-
 
         return route[:-1], distance
