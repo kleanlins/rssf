@@ -8,26 +8,33 @@ import utils
 class Router:
     def __init__(self, hosts):
         self.hosts = hosts
-        pass
 
     
-    def discovery(self):
+    def hello(self):
         '''
         Creates a list of adjacency for each host.
         '''
-        pass
+        for host in self.hosts:
+            host.update_adj_hosts(self.hosts)
+
+    
+    def create_routes(self, host_id, dest_id):
+        '''
+        Creates a route to each host for each host.
+        '''
+        route = []
+
+        return self.hosts[host_id].find_route(self.hosts[dest_id], route, 0)
 
 
-    def change_host_status(self, host):
-        '''
-        Based on host ID, change it's status to online or offline.
-        Mainly to test routing reconfiguration.
-        '''
-        pass
+    def forward_data(self, route, package):
 
-    def trace_route(self, data, sender, receiver):
-        '''
-        Creates a route based on sender, receiver and host list of adjacency.
-        Return a list of hosts representing a route.
-        '''
-        pass
+        for host in route:
+            host.forward_data(package)
+        
+        sender_host = route[0]
+        receiver_host = route[-1]
+
+        sender_host.sent_data.append(package)
+        receiver_host.received_data.append(package)
+

@@ -3,6 +3,8 @@
 import matplotlib.pyplot as plt
 import math
 
+signal_k = 1550
+
 def plot_map(hosts, width, height):
     '''
     Plot a representation of a map containing all hosts and it's
@@ -10,6 +12,7 @@ def plot_map(hosts, width, height):
     '''
     # figure dimensions
     plt.axis([0, width, 0, height])
+    # fig = plt.figure(figsize = (10,10))
 
     # figure labels
     plt.xlabel("in Km")
@@ -23,8 +26,8 @@ def plot_map(hosts, width, height):
         plt.annotate(host.address, (host.position[0]+0.1, host.position[1]+0.1))
     
         # plotting estimated area coverage
-        area = math.pi * (host.range ** 2)
-        plt.scatter(host.position[0], host.position[1], s=area*900, alpha=0.1)
+        area = math.pi * (host.range ** 2) * signal_k
+        plt.scatter(host.position[0], host.position[1], s=area, alpha=0.1)
         
     plt.show()
 
@@ -49,8 +52,8 @@ def plot_route(hosts, route, width, height):
         plt.annotate(host.address, (host.position[0]+0.1, host.position[1]+0.1))
     
         # plotting estimated area coverage
-        area = math.pi * (host.range ** 2)
-        plt.scatter(host.position[0], host.position[1], s=area*900, alpha=0.1)
+        area = math.pi * (host.range ** 2) * signal_k
+        plt.scatter(host.position[0], host.position[1], s=area, alpha=0.1)
         
 
     for i in range(len(route)-1):
@@ -67,51 +70,14 @@ def plot_route(hosts, route, width, height):
     plt.show()
 
 
-def plot_host_routes(hosts, origin, width, height):
+def plot_host_routes(host):
     '''
     Plot all possible routes based on a host list of adjacency.
-
-        assumindo que vá receber adj_list_A = [B,C,D]
-        Desenho fica:
-                          B  
-                         /
-                        A -- C
-                         \
-                          D
     '''
-    # figure dimensions
-    plt.axis([0, width, 0, height])
-    # fig = plt.figure(figsize = (10,10))
-
-    # figure labels
-    plt.xlabel("in Km")
-    plt.ylabel("in Km")
-
-    for host in hosts:
-        # plotting host representation
-        plt.plot(host.position[0], host.position[1], 'k^')
-        
-        # plotting host name
-        plt.annotate(host.address, (host.position[0]+0.1, host.position[1]+0.1))
-    
-        # plotting estimated area coverage
-        area = math.pi * (host.range ** 2)
-        plt.scatter(host.position[0], host.position[1], s=area*900, alpha=0.1)
-    
-    for i in range(len(origin.adj)-1):
-        x = hosts[origin].position[0]
-        y = hosts[origin].position[1]
-
-        dx = hosts[origin].adj[i+1].position[0] - hosts[origin].position[0]
-        dy = hosts[origin].adj[i+1].position[1] - hosts[origin].position[1]
-        
-        plt.arrow(x, y, dx, dy)
-
-    plt.show()
+    pass
 
 
-def plot_reachable_hosts(host):
+def plot_reachable_hosts(host, width, height):
     '''
     Plot an arrow indicating all reachable hosts.
     '''
-    
