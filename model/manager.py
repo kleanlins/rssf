@@ -66,7 +66,7 @@ class Manager:
 			if i != id:
 				self.router.create_routes(id, i)
 		
-		self.show_routes(id)
+		#self.show_routes(id)
 
 
 	def show_routes(self, host_id):

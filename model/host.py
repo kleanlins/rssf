@@ -61,8 +61,8 @@ class Host:
 
 		self.adjacent_hosts = sorted(self.adjacent_hosts, key=lambda x: x.distance_to(self))
 
-		for host in self.adjacent_hosts:
-			print(f"{self.address} -> {host} d={self.distance_to(host)}")
+		#for host in self.adjacent_hosts:
+		#	print(f"{self.address} -> {host} d={self.distance_to(host)}")
 
 
 	def distance_to(self, other):
@@ -99,9 +99,9 @@ class Host:
 				redundancy.append(each)
 
 		if len(redundancy) > 2:
-			#for each in redundancy[:-1]:
-			#	after.remove(each)
-			after = after[after.index(redundancy[-1]):]
+			for each in redundancy[:-1]:
+				after.remove(each)
+			#after = after[after.index(redundancy[-1]):]
 		
 		self.routes[destination.address] = (after, distance)
 		return before + after

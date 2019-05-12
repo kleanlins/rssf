@@ -3,6 +3,8 @@
 import matplotlib.pyplot as plt
 import math
 
+signal_k = 1550
+
 def plot_map(hosts, width, height):
     '''
     Plot a representation of a map containing all hosts and it's
@@ -24,8 +26,8 @@ def plot_map(hosts, width, height):
         plt.annotate(host.address, (host.position[0]+0.1, host.position[1]+0.1))
     
         # plotting estimated area coverage
-        area = math.pi * (host.range ** 2)
-        plt.scatter(host.position[0], host.position[1], s=area*900, alpha=0.1)
+        area = math.pi * (host.range ** 2) * signal_k
+        plt.scatter(host.position[0], host.position[1], s=area, alpha=0.1)
         
     plt.show()
 
@@ -50,8 +52,8 @@ def plot_route(hosts, route, width, height):
         plt.annotate(host.address, (host.position[0]+0.1, host.position[1]+0.1))
     
         # plotting estimated area coverage
-        area = math.pi * (host.range ** 2)
-        plt.scatter(host.position[0], host.position[1], s=area*900, alpha=0.1)
+        area = math.pi * (host.range ** 2) * signal_k
+        plt.scatter(host.position[0], host.position[1], s=area, alpha=0.1)
         
 
     for i in range(len(route)-1):
