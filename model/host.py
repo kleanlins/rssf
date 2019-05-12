@@ -98,9 +98,10 @@ class Host:
 			if each in self.adjacent_hosts:
 				redundancy.append(each)
 
-		if len(redundancy) > 1:
-			for each in redundancy[:-1]:
-				after.remove(each)
+		if len(redundancy) > 2:
+			#for each in redundancy[:-1]:
+			#	after.remove(each)
+			after = after[after.index(redundancy[-1]):]
 		
 		self.routes[destination.address] = (after, distance)
 		return before + after
