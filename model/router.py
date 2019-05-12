@@ -8,7 +8,6 @@ import utils
 class Router:
     def __init__(self, hosts):
         self.hosts = hosts
-        pass
 
     
     def hello(self):
@@ -26,4 +25,16 @@ class Router:
         route = []
 
         return self.hosts[host_id].find_route(self.hosts[dest_id], route, 0)
+
+
+    def forward_data(self, route, package):
+
+        for host in route:
+            host.forward_data(package)
+        
+        sender_host = route[0]
+        receiver_host = route[-1]
+
+        sender_host.sent_data.append(package)
+        receiver_host.received_data.append(package)
 
